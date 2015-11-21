@@ -26,6 +26,7 @@ public:
 
 	char *incomingMessage(char *pBuffer);
 	char *parser(char *pBuffer);
+	bool validate(char *pMessage);
 
 
 private:

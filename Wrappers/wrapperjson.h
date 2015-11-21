@@ -32,6 +32,7 @@ public:
 	rapidjson::Document readFile(const char* pPath);
 	int readIntValue(rapidjson::Document &pDocument, const char* pTag);
 	void writeFile();
+	bool validateFile(char *pFile);
 
 	};
 

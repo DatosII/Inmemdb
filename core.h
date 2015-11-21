@@ -5,6 +5,7 @@
 #include "Server/server.h"
 
 #define CONFIG_FILE_PATH "/home/pablo/Memdb/config.json"
+#define MEMBER_PORT "port"
 
 /**
  * @file core.h

@@ -27,6 +27,7 @@ Adapter::Adapter(Core *pCore){
  */
 char *Adapter::incomingMessage(char *pBuffer){
 
+	std::cout << pBuffer << std::endl;
 	if(_protocol == NULL){
 		std::string tempStr = (char const*)pBuffer;
 		if(tempStr == PROTOCOL_XML)
@@ -40,7 +41,12 @@ char *Adapter::incomingMessage(char *pBuffer){
 	}
 
 	else{
-		return this->parser(pBuffer);
+		if(this->validate(pBuffer))
+			return this->parser(pBuffer);
+		else{
+			char *error(ERROR_MESSAGE);
+			return error;
+		}
 	}
 }
 
@@ -55,6 +61,25 @@ char *Adapter::incomingMessage(char *pBuffer){
  * @return Mensaje de respuesta al cliente
  */
 char *Adapter::parser(char *pBuffer){
+
+}
+
+
+
+/**
+ * @brief Método que permite validar el formato del archivo recibido
+ *
+ * De acuerdo al protocolo de comunicación especificado, se valida
+ * si los mensajes recibidos por el puerto se encuentran en el formato
+ * correcto
+ *
+ * @param pMessage Mensaje recibido por el puerto
+ *
+ * @return True si el formato es valido, false en caso contrario
+ */
+bool Adapter::validate(char *pMessage){
+	if(_protocol == JSON)
+		return _json->validateFile(pMessage);
 
 }
 

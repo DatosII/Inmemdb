@@ -48,9 +48,9 @@ int WrapperJSON::readIntValue(rapidjson::Document &pDocument, const char *pMembe
 			if(pDocument[pMember].IsInt())
 				return pDocument[pMember].GetInt();
 		}
-		else return NULL;
+		else return ZERO;
 	}
-	else return NULL;
+	else return ZERO;
 }
 
 
@@ -60,20 +60,59 @@ void WrapperJSON::writeFile(){
 	rapidjson::StringBuffer s;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(s);//escritura en json
 	writer.StartObject();
-	writer.String("esquema");
-	writer.String("estudiante");
-	writer.String("Nombre");
-	writer.String("Jairo");
-	writer.String("Carnet");
-	writer.Int(2014043224);
-	writer.String("Ponderado General");
-	writer.Int(70);
-	writer.String("Ponderado Semestral");
-	writer.Int(75);
+	writer.String("messageType");
+	writer.String("createScheme");
+
+	writer.String("shemeName");
+	writer.String("person");
+	writer.String("RAID");
+	writer.Int(01);
+
+	writer.String("data");
+	writer.StartObject();
+	writer.String("dataType");
+	writer.String("String");
+	writer.String("dataName");
+	writer.String("name");
+	writer.String("dataLenght");
+	writer.Int(32);
 	writer.EndObject();
+
+	writer.String("data");
+	writer.StartObject();
+	writer.String("dataType");
+	writer.String("int");
+	writer.String("dataName");
+	writer.String("age");
+	writer.String("dataLenght");
+	writer.Int(4);
+	writer.EndObject();
+
+	writer.EndObject();
+
 
 	std::cout << s.GetString() << std::endl;//imprime el json
 
 
+}
+
+
+
+/**
+ * @brief Método que permite validar un archivo JSON
+ * Recibe un puntero char con el texto del archivo, este
+ * se almacena en un objeto tipo Document de la biblioteca
+ * rapidjon y luego se parsea a formato JSON, para luego
+ * comprobar si es valido o no
+ *
+ * @param pFile Archivo JSON
+ *
+ * @return True si es un formato valido, false en caso contrario
+ */
+bool WrapperJSON::validateFile(char *pFile){
+	rapidjson::Document document;
+	document.Parse<0>(pFile);
+	if(document.IsObject()) return true;
+	else return false;
 }
 

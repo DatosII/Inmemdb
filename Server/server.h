@@ -10,7 +10,9 @@
 #include <pthread.h>
 #include <iostream>
 #include <time.h>
-#include "core.h"
+#include "Adapter/adapter.h"
+
+#define TRUNC '\0'
 
 /**
  * @file server.h
@@ -19,20 +21,20 @@
  * @date 19/11/15
  */
 
-class Core;
+class Adapter;
 struct Parameters{
 	int _socket;
 	pthread_mutex_t _mutex;
-	Core *_core;
 	unsigned char *mensaje;
+	Adapter *_adapter;
 	void *server = this;
 };
 
 
 class Server{
 public:
-	Server(Core *pCore);
-
+	Server(Adapter *pAdapter);
+	Adapter *_adapter;
 	void setPort(int pPort);
 	void initServer();
 

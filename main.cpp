@@ -1,8 +1,10 @@
 #include <iostream>
+#include "core.h"
 
 int main(){
 
-    std::cout << "0" << std::endl;
+	WrapperJSON *json = new WrapperJSON();
+	json->writeFile();
 
 	return 0;
 }
