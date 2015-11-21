@@ -12,6 +12,16 @@ TARGET = InMemdb
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    Adapter/adapter.cpp \
+    Server/server.cpp \
+    Wrappers/wrapperjson.cpp \
+    Wrappers/wrapperxml.cpp \
+    core.cpp
 
-HEADERS  +=
+HEADERS  += \
+    Adapter/adapter.h \
+    Server/server.h \
+    Wrappers/wrapperjson.h \
+    Wrappers/wrapperxml.h \
+    core.h
